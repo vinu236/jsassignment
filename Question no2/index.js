@@ -140,10 +140,8 @@ function loginUser(event) {
     return;
   }
 
-  // Check if the client is registered
   if (isClientRegistered(email)) {
     alert("Login successful! Redirecting to Services Option Page...");
-    // window.location.href = 'services.html'; // Uncomment when the services page is ready
   } else {
     alert("User not found. Please register first.");
   }
@@ -223,57 +221,125 @@ const services = [
 
 
 let selectedServices = [];
-// intial time dom render,=>populate witht the service data
+
+// Function to hide the "Select Services" message
+function hideServiceMessage() {
+  const serviceText = document.getElementById("service-text");
+  serviceText.innerHTML = "";
+}
+
+// Function to show the "No service selected" message if no service is selected
+function updateNoServiceText() {
+  const noServiceText = document.getElementById("noServiceSelectedText");
+
+  // Show the "No service selected" text if no services are selected
+  if (selectedServices.length === 0) {
+    noServiceText.style.display = "block"; // Show the text
+  } else {
+    noServiceText.style.display = "none"; // Hide the text
+  }
+}
+
+// On initial page load, populate the stylist dropdown
 document.addEventListener("DOMContentLoaded", function () {
   const stylistDropdown = document.getElementById("stylist");
   const stylists = [...new Set(services.map(service => service.stylist))];
-  
 
   stylists.forEach(stylist => {
-      const option = document.createElement("option");
-      option.value = stylist;
-      option.textContent = stylist;
-      stylistDropdown.appendChild(option);
+    const option = document.createElement("option");
+    option.value = stylist;
+    option.textContent = stylist;
+    stylistDropdown.appendChild(option);
   });
 
-  // Set up event listener for stylist selection
+  hideServiceMessage();  // Hide the "Select Services" message initially
+  updateNoServiceText(); // Check if any services are selected
+
   stylistDropdown.addEventListener("change", filterServicesByStylist);
 });
 
-// Function to filter services by stylist
+// Function to filter services by stylist and show checkboxes
 function filterServicesByStylist() {
   const stylist = document.getElementById("stylist").value;
-  const serviceList = document.getElementById("serviceList");
+  const serviceTable = document.getElementById("service-table");
+  const serviceTableBody = document.getElementById("service-table").querySelector("tbody");
+  const noDataText = document.getElementById("no-data-available");
+  const servicesByStylist = services.filter(service => service.stylist === stylist);
 
-  serviceList.innerHTML = '<option value="">Select a Service</option>';
+  // Clear previous list
+  serviceTableBody.innerHTML = '';
 
-  services
-      .filter(service => service.stylist === stylist)
-      .forEach(service => {
-          const option = document.createElement("option");
-          option.value = JSON.stringify(service);
-          option.textContent = `${service.name} - $${service.price} (${service.duration} mins)`;
-          serviceList.appendChild(option);
-      });
+  // If no services available for the selected stylist, show "No data available"
+  if (servicesByStylist.length === 0) {
+    serviceTable.style.display = "none"; // Hide the table
+    noDataText.style.display = "block"; // Show the "No data available" message
+    document.getElementById("noServiceSelectedText").style.display = "none"; // Hide the "No service selected" text
+  } else {
+    // If services are available, create rows for each service
+    serviceTable.style.display = "table"; // Show the table
+    noDataText.style.display = "none"; // Hide the "No data available" message
 
-  selectedServices = [];
-  updateTotalCostAndDuration();
-}
+    servicesByStylist.forEach(service => {
+      const row = document.createElement("tr");
 
-document.getElementById("serviceList").addEventListener("change", function () {
-if(this.value){
-  console.log("this.value",this.value)
-  const selectedService = JSON.parse(this.value);
-  
-  if (selectedService && !selectedServices.find(s => s.name === selectedService.name)) {
-      selectedServices.push(selectedService);
+      // Checkbox cell
+      const checkboxCell = document.createElement("td");
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.value = JSON.stringify(service);
+      checkbox.id = service.id;
+
+      // Check if this service is already in selectedServices and check the checkbox
+      checkbox.checked = selectedServices.some(s => s.id === service.id);
+      checkbox.addEventListener("change", updateSelectedServices);
+      checkboxCell.appendChild(checkbox);
+
+      // Name cell
+      const nameCell = document.createElement("td");
+      nameCell.textContent = service.name;
+
+      // Price cell
+      const priceCell = document.createElement("td");
+      priceCell.textContent = `$${service.price}`;
+
+      // Duration cell
+      const durationCell = document.createElement("td");
+      durationCell.textContent = `${service.duration} mins`;
+
+      row.appendChild(checkboxCell);
+      row.appendChild(nameCell);
+      row.appendChild(priceCell);
+      row.appendChild(durationCell);
+
+      serviceTableBody.appendChild(row);
+    });
+
+    // Hide the "No service selected" text because services are now available
+    updateNoServiceText();
   }
-  updateTotalCostAndDuration();
-}else{
-  selectedServices = [];
 }
-});
 
+// Update selected services based on checkbox state
+function updateSelectedServices(event) {
+  const service = JSON.parse(event.target.value);
+
+  // If checked, add the service to the list, otherwise remove it
+  if (event.target.checked) {
+    if (!selectedServices.find(s => s.id === service.id)) {
+      selectedServices.push(service);
+    }
+  } else {
+    selectedServices = selectedServices.filter(s => s.id !== service.id);
+  }
+
+  // Update the "No service selected" text visibility based on selected services
+  updateNoServiceText();
+
+  // Update total cost and duration
+  updateTotalCostAndDuration();
+}
+
+// Function to update the total cost and duration
 function updateTotalCostAndDuration() {
   const totalCost = selectedServices.reduce((sum, service) => sum + service.price, 0);
   const totalDuration = selectedServices.reduce((sum, service) => sum + service.duration, 0);

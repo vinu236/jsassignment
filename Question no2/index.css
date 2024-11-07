@@ -5,7 +5,6 @@
 * {
   margin: 0px;
   padding: 0px;
-  overflow: hidden;
   box-sizing: border-box;
 }
 
@@ -17,12 +16,10 @@
   height: 100vh;
   font-family: sans-serif;
 }
-.registerRoot{
+.registerRoot {
   background-image: url("./public/img/saloon2.jpg");
   font-family: sans-serif;
   background-repeat: no-repeat;
-
-
 }
 .container {
   display: flex;
@@ -38,13 +35,13 @@
   width: 400px;
   max-width: 420px;
   transform: translateY(-50%);
-  background-color: transparent; 
-  backdrop-filter: blur(
-    10px
-  ); 
-  padding: 70px 20px; 
-  border-radius: 8px; 
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+  background-color: transparent;
+  overflow: hidden;
+
+  backdrop-filter: blur(10px);
+  padding: 70px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -57,7 +54,6 @@
   margin-bottom: 20px;
   color: #fff;
 }
-
 
 .btn {
   background-color: black;
@@ -75,21 +71,21 @@
 }
 
 .btn:active {
-    transform: scale(0.98); 
+  transform: scale(0.98);
 }
 
-.btn-register{
+.btn-register {
   padding: 15px;
   width: 100%;
   margin: 0px auto;
 }
-.btn-login{
+.btn-login {
   padding: 10px;
   width: 100%;
   margin: 0px auto;
 }
-.formV2{
-    width: 500px;
+.formV2 {
+  width: 500px;
 }
 .formV1 .input-field {
   width: 100%;
@@ -111,35 +107,181 @@
   font-size: 16px;
 }
 
-
 .register {
   position: absolute;
   right: 8%;
   top: 50%;
   transform: translateY(-50%);
-  background-color: transparent; 
-  backdrop-filter: blur(
-    10px
-  ); 
-  padding: 20px 40px; 
-  border-radius: 8px; 
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+  padding: 20px 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
-a{
+a {
   text-decoration: none;
   text-transform: uppercase;
   padding: 15px 30px;
   display: block;
 
-  text-align: right;  
-  transition: all .3s ease-in;
+  text-align: right;
+  transition: all 0.3s ease-in;
   cursor: pointer;
 }
 a:hover {
-          /* Darkens background on hover */
-  color: #fff;                      /* Keeps text color consistent */
+  color: #fff; /
 }
-.forgotPassword{
+.forgotPassword {
   font-size: 10px;
+}
+
+.hero-service {
+  position: relative;
+  width: 100%;
+  height: 400px; 
+  overflow: hidden;
+  transition: all .5s ease-in;
+}
+
+.hero-service img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-service:hover {
+  transform: scale(1.01);
+}
+
+.hero-service::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-service h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 3rem;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  text-align: center;
+}
+
+#app {
+  /* padding: 10px; */
+  background-color: white;
+  border-radius: 8px;
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+  overflow: hidden;
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2c3e50;
+}
+
+label {
+  font-size: .8rem;
+  margin-bottom: 2px;
+  display: block;
+}
+
+select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0 20px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+select:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+#totalCostDuration {
+  padding: 15px;
+  border-radius: 5px;
+  margin-top: 20px;
+  font-family: sans-serif;
+  display:flex;
+  flex-direction: row-reverse;
+  gap:10px;
+}
+
+#totalCostDuration p {
+  margin: 5px 0;
+  font-size: .8rem;
+}
+
+#totalCostDuration span {
+  font-weight: bold;
+  font-size: .8rem;
+  color: #e74c3c;
+}
+
+@media (max-width: 600px) {
+  .hero-service h1 {
+    font-size: 2.5rem;
+  }
+
+  select {
+    font-size: 1rem;
+    padding: 8px;
+  }
+
+  #totalCostDuration p {
+    font-size: 1rem;
+  }
+}
+.service-container{
+  margin-top: 30px;
+  padding: 30px;
+}
+
+.select-box-content{
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-direction: column;
+}
+.select-box{
+  display: flex;
+  flex-direction: column;
+}
+.service-item{
+  display: flex;
+  margin-top: 10px;
+  gap: 10px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-collapse: collapse;
+  table-layout: fixed; /* Ensures columns take up the full width */
+  margin-top: 10px;
+}
+
+th, td {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+td input[type="checkbox"] {
+  margin: 0;
 }
