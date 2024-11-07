@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hair Salon Scheduler - Login/Signup</title>
+    <link rel="stylesheet" href="./index.css">
+    <style>
+      form {
+        max-width: 400px;
+        margin: auto;
+      }
+      input,
+      select,
+      button {
+        width: 100%;
+        margin-bottom: 1em;
+        padding: 8px;
+        font-size: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="root loginRoot">
+      <div id="login" class="container">
+        <div class="login">
+            <h2>Login</h2>
+            <form id="loginForm"  onsubmit="loginUser(event)" class="formV1">
+              <input type="email"  id="email" placeholder="Email"  class="input-field" />
+              <input type="email"  id="email" placeholder="Password"  class="input-field" />
+              <button type="submit"  class="btn">Login</button>
+              <a type="button" onclick="forgotPassword()" class="forgotPassword">
+                Forgot Password ?
+              </a>
+            </form>
+        </div>
+      </div>
+    </div>
+  
+
+    <script src="index.js"></script>
+  </body>
+</html>

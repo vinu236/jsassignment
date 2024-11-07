@@ -1,0 +1,145 @@
+:root {
+  --bg-ash: #d5d8de;
+}
+
+* {
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.loginRoot {
+  background-image: url("./public/img/saloon.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: left;
+  height: 100vh;
+  font-family: sans-serif;
+}
+.registerRoot{
+  background-image: url("./public/img/saloon2.jpg");
+  font-family: sans-serif;
+  background-repeat: no-repeat;
+
+
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.login {
+  position: absolute;
+  right: 8%;
+  top: 50%;
+  width: 400px;
+  max-width: 420px;
+  transform: translateY(-50%);
+  background-color: transparent; 
+  backdrop-filter: blur(
+    10px
+  ); 
+  padding: 70px 20px; 
+  border-radius: 8px; 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.login h2 {
+  margin-bottom: 20px;
+  color: #fff;
+  font-size: 25px;
+}
+.register h2 {
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+
+.btn {
+  background-color: black;
+  border: none;
+  border-radius: 100px;
+  color: #fff;
+  transition: all 0.5s ease;
+  font-weight: 300;
+  border: none;
+  display: inline-block;
+  overflow: hidden;
+  text-align: center;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.btn:active {
+    transform: scale(0.98); 
+}
+
+.btn-register{
+  padding: 15px;
+  width: 100%;
+  margin: 0px auto;
+}
+.btn-login{
+  padding: 10px;
+  width: 100%;
+  margin: 0px auto;
+}
+.formV2{
+    width: 500px;
+}
+.formV1 .input-field {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #cac9ce;
+  outline: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.formV2 .input-field {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #cac9ce;
+  outline: none;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+
+.register {
+  position: absolute;
+  right: 8%;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent; 
+  backdrop-filter: blur(
+    10px
+  ); 
+  padding: 20px 40px; 
+  border-radius: 8px; 
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+a{
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 15px 30px;
+  display: block;
+
+  text-align: right;  
+  transition: all .3s ease-in;
+  cursor: pointer;
+}
+a:hover {
+          /* Darkens background on hover */
+  color: #fff;                      /* Keeps text color consistent */
+}
+.forgotPassword{
+  font-size: 10px;
+}
